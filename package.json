@@ -1,0 +1,24 @@
+{
+  "name": "tabnews",
+  "version": "1.0.0",
+  "description": "TabNews Clone",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pimentafm/tabnews.git"
+  },
+  "author": "Fernando Pimenta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pimentafm/tabnews/issues"
+  },
+  "homepage": "https://github.com/pimentafm/tabnews#readme",
+  "dependencies": {
+    "next": "^13.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
