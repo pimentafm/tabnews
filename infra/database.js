@@ -31,14 +31,6 @@ function getSSLValues() {
   if (process.env.POSTGRES_CA) {
     return {
       ca: process.env.POSTGRES_CA,
-      rejectUnauthorized: false,
-    };
-  }
-
-  if (process.env.NODE_ENV === "production") {
-    return {
-      rejectUnauthorized: false,
-      sslmode: "require",
     };
   }
 
