@@ -6,8 +6,8 @@ async function query(queryObject) {
     port: process.env.POSTGRES_PORT || 5432,
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB || "tabnews",
-    password: process.env.POSTGRES_PASSWORD,
-    ssl: process.env.NODE_ENV === "development" ? false : true,
+    password: String(process.env.POSTGRES_PASSWORD),
+    ssl: getSSLValues(),
   });
 
   try {
@@ -20,10 +20,18 @@ async function query(queryObject) {
   } finally {
     await client.end();
   }
-
-  return result;
 }
 
 export default {
   query: query,
 };
+
+function getSSLValues() {
+  if (process.env.POSTGRES_CA) {
+    return {
+      ca: process.env.POSTGRES_CA,
+    };
+  }
+
+  return process.env.NODE_ENV === "development" ? false : true;
+}
