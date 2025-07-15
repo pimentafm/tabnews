@@ -6,7 +6,7 @@ async function query(queryObject) {
     port: process.env.POSTGRES_PORT || 5432,
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB || "tabnews",
-    password: String(process.env.POSTGRES_PASSWORD),
+    password: process.env.POSTGRES_PASSWORD,
     pool_mode: process.env.POSTGRES_POOL_MODE || "session",
     ssl: getSSLValues(),
   });
