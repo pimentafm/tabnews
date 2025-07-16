@@ -8,7 +8,7 @@ async function query(queryObject) {
     database: process.env.POSTGRES_DB || "tabnews",
     password: String(process.env.POSTGRES_PASSWORD),
     pool_mode: process.env.POSTGRES_POOL_MODE || "session",
-    ssl: { rejectUnauthorized: false },
+    ssl: getSSLValues(),
   });
 
   try {
@@ -28,15 +28,9 @@ export default {
 };
 
 function getSSLValues() {
-  if (process.env.POSTGRES_CA) {
-    return {
-      ca: process.env.POSTGRES_CA,
-      rejectUnauthorized: false,
-    };
-  }
-
   if (process.env.NODE_ENV === "production") {
     return {
+      ca: process.env.POSTGRES_CA,
       rejectUnauthorized: false,
     };
   }
