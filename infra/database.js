@@ -16,6 +16,7 @@ async function query(queryObject) {
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB,
     password: String(process.env.POSTGRES_PASSWORD),
+    pool_mode: process.env.POSTGRES_POOL_MODE || "session",
     ssl: getSSLValues(),
   });
 
