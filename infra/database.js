@@ -1,13 +1,21 @@
 import { Client } from "pg";
 
+function getSSLValues() {
+  if (process.env.POSGRES_CA) {
+    return {
+      ca: process.env.POSGRES_CA,
+    };
+  }
+  return process.env.NODE_ENV === "development" ? false : true;
+}
+
 async function query(queryObject) {
   const client = new Client({
-    host: process.env.POSTGRES_HOST || "localhost",
-    port: process.env.POSTGRES_PORT || 5432,
+    host: process.env.POSTGRES_HOST,
+    port: process.env.POSTGRES_PORT,
     user: process.env.POSTGRES_USER,
-    database: process.env.POSTGRES_DB || "tabnews",
-    password: String(process.env.POSTGRES_PASSWORD),
-    pool_mode: process.env.POSTGRES_POOL_MODE || "session",
+    database: process.env.POSTGRES_DB,
+    password: process.env.POSTGRES_PASSWORD,
     ssl: getSSLValues(),
   });
 
@@ -26,14 +34,3 @@ async function query(queryObject) {
 export default {
   query: query,
 };
-
-function getSSLValues() {
-  if (process.env.NODE_ENV === "production") {
-    return {
-      ca: process.env.POSTGRES_CA,
-      rejectUnauthorized: false,
-    };
-  }
-
-  return process.env.NODE_ENV === "development" ? false : true;
-}
