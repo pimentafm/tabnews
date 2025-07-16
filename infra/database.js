@@ -4,6 +4,7 @@ function getSSLValues() {
   if (process.env.POSGRES_CA) {
     return {
       ca: process.env.POSGRES_CA,
+      rejectUnauthorized: false,
     };
   }
   return process.env.NODE_ENV === "development" ? false : true;
