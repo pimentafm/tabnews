@@ -1,9 +1,9 @@
 import { Client } from "pg";
 
 function getSSLValues() {
-  if (process.env.POSGRES_CA) {
+  if (process.env.POSTGRES_CA) {
     return {
-      ca: process.env.POSGRES_CA,
+      ca: process.env.POSTGRES_CA,
       rejectUnauthorized: false,
     };
   }
